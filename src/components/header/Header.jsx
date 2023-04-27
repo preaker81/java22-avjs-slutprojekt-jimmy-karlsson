@@ -5,7 +5,7 @@ function Header() {
   return (
     <header>
       <nav className="nav-bar">
-        <img className="logo" src="../src/img/logo.png" alt="" />
+        <img className="logo" src="%PUBLIC_URL%/logo.png" alt="" />
         <ul className="nav-btn-list">
           <li>
             <button className="header-btn-prod">Products</button>
