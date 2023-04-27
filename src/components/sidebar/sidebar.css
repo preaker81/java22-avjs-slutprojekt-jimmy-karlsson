@@ -1,0 +1,47 @@
+.sidebar-left{
+    position: fixed;
+    left: 0;
+    top: 10rem;
+    border: 2px solid #494947;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.filter-checkbox-container > hr{
+    width: 90%;
+    background-color: #494947;
+    height: 2px;
+    margin-left: 10px;
+}
+
+.filter-checkbox-container > h3 {
+    text-align: center;
+}
+
+.filter-checkbox-container > ul{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 10px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.filter-checkbox-container > ul > li{
+    display: flex;
+    align-items: center;
+}
+.filter-checkbox-color{
+    width: 30px;
+    margin: 10px;
+}
+
+.filter-checkbox{
+    scale: 2;
+    margin: 10px;
+}
+
+.filter-range{
+    width: 90%;
+    margin-left: 10px;
+}
