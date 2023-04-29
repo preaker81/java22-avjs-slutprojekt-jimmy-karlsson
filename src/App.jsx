@@ -22,6 +22,7 @@ function App() {
     fetchData();
   }, []);
 
+  // Function that is passed to Sidebar
   const handleColorCheckboxChange = (event) => {
     const color = event.target.value;
     const newSelectedColors = new Set(selectedColors);
@@ -35,6 +36,7 @@ function App() {
     setSelectedColors(newSelectedColors);
   };
 
+  // Filter the DB data before passing to Products
   const filteredData = data.filter((item) =>
     item.colorIdentity.some((color) => selectedColors.has(color))
   );
