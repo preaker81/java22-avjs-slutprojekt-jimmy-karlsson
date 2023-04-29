@@ -1,27 +1,17 @@
-import React, { useEffect } from "react";
 import "/src/components/products/products.css";
 import ProdCard from "./ProdCard";
 
-// TODO useeffect getFirebase DB
-
-function Products() {
+function Products({ data, setData }) {
   return (
     <div className="product-container">
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
-      <ProdCard />
+      {data.map((item) => (
+        <ProdCard
+          key={item.uuid}
+          name={item.name}
+          imgURL={item.imgURL}
+          price={item.price}
+        />
+      ))}
     </div>
   );
 }
