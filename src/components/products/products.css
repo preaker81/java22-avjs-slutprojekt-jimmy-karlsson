@@ -1,11 +1,8 @@
 .product-container {
-  margin: 3rem 1rem 1rem 13rem;
-  padding: 1rem;
-}
+  margin: 5rem 2rem 1rem 10rem;
 
-.product-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 10px;
-  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 10px;
 }

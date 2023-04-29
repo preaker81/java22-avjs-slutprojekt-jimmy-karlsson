@@ -1,7 +1,7 @@
 const getDBURL =
   "https://slutprojectwebshop-default-rtdb.europe-west1.firebasedatabase.app/alpha.json";
 
-async function getFirebase() {
+async function getFirebaseData() {
   try {
     const response = await fetch(getDBURL);
     const dbData = await response.json();
@@ -12,4 +12,4 @@ async function getFirebase() {
   }
 }
 
-export { getFirebase };
+export { getFirebaseData };

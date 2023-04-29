@@ -12,11 +12,10 @@ function Sidebar({ onColorCheckboxChange }) {
     <aside className="sidebar-left">
       <div className="filter-checkbox-container">
         <h3>Filter by Color</h3>
+        <hr />
         <ul>
           <li>
-            <img className="filter-checkbox-color"
-            src={white}
-            alt="white" />
+            <img className="filter-checkbox-color" src={white} alt="white" />
             <input
               className="filter-checkbox"
               type="checkbox"
@@ -26,9 +25,7 @@ function Sidebar({ onColorCheckboxChange }) {
           </li>
 
           <li>
-            <img className="filter-checkbox-color"
-            src={blue}
-            alt="blue" />
+            <img className="filter-checkbox-color" src={blue} alt="blue" />
             <input
               className="filter-checkbox"
               type="checkbox"
@@ -38,9 +35,7 @@ function Sidebar({ onColorCheckboxChange }) {
           </li>
 
           <li>
-            <img className="filter-checkbox-color"
-            src={black}
-            alt="black" />
+            <img className="filter-checkbox-color" src={black} alt="black" />
             <input
               className="filter-checkbox"
               type="checkbox"
@@ -50,9 +45,7 @@ function Sidebar({ onColorCheckboxChange }) {
           </li>
 
           <li>
-            <img className="filter-checkbox-color"
-            src={red}
-            alt="red" />
+            <img className="filter-checkbox-color" src={red} alt="red" />
             <input
               className="filter-checkbox"
               type="checkbox"
@@ -62,9 +55,7 @@ function Sidebar({ onColorCheckboxChange }) {
           </li>
 
           <li>
-            <img className="filter-checkbox-color"
-            src={green}
-            alt="green" />
+            <img className="filter-checkbox-color" src={green} alt="green" />
             <input
               className="filter-checkbox"
               type="checkbox"
@@ -87,11 +78,6 @@ function Sidebar({ onColorCheckboxChange }) {
             />
           </li>
         </ul>
-
-        <hr />
-
-        <h3>Filter by max price</h3>
-        <input className="filter-range" type="range" name="" id="" />
       </div>
     </aside>
   );
