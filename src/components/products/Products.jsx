@@ -10,6 +10,7 @@ function Products({ data, setData }) {
           name={item.name}
           imgURL={item.imgURL}
           price={item.price}
+          stock={item.stock}
         />
       ))}
     </div>

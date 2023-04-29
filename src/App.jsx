@@ -7,6 +7,7 @@ import { getFirebase } from "/src/js/firebase";
 
 function App() {
   const [data, setData] = useState([]);
+  const [selectedColors, setSelectedColors] = useState(new Set());
 
   useEffect(() => {
     async function fetchData() {
@@ -21,11 +22,28 @@ function App() {
     fetchData();
   }, []);
 
+  const handleColorCheckboxChange = (event) => {
+    const color = event.target.value;
+    const newSelectedColors = new Set(selectedColors);
+
+    if (event.target.checked) {
+      newSelectedColors.add(color);
+    } else {
+      newSelectedColors.delete(color);
+    }
+
+    setSelectedColors(newSelectedColors);
+  };
+
+  const filteredData = data.filter((item) =>
+    item.colorIdentity.some((color) => selectedColors.has(color))
+  );
+
   return (
     <div>
       <Header />
-      <Sidebar />
-      <Products data={data} setData={setData} />
+      <Sidebar onColorCheckboxChange={handleColorCheckboxChange} />
+      <Products data={selectedColors.size > 0 ? filteredData : data} />
     </div>
   );
 }

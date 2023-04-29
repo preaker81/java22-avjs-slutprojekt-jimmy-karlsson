@@ -7,39 +7,84 @@ import red from "/src/img/r.png";
 import green from "/src/img/g.png";
 import colorless from "/src/img/cl.png";
 
-function Sidebar() {
+function Sidebar({ onColorCheckboxChange }) {
   return (
     <aside className="sidebar-left">
       <div className="filter-checkbox-container">
         <h3>Filter by Color</h3>
         <ul>
           <li>
-            <img className="filter-checkbox-color" src={white} alt="white" />
-            <input className="filter-checkbox" type="checkbox" name="" id="" />
+            <img className="filter-checkbox-color"
+            src={white}
+            alt="white" />
+            <input
+              className="filter-checkbox"
+              type="checkbox"
+              value="W"
+              onChange={onColorCheckboxChange}
+            />
           </li>
+
           <li>
-            <img className="filter-checkbox-color" src={blue} alt="blue" />
-            <input className="filter-checkbox" type="checkbox" name="" id="" />
+            <img className="filter-checkbox-color"
+            src={blue}
+            alt="blue" />
+            <input
+              className="filter-checkbox"
+              type="checkbox"
+              value="U"
+              onChange={onColorCheckboxChange}
+            />
           </li>
+
           <li>
-            <img className="filter-checkbox-color" src={black} alt="black" />
-            <input className="filter-checkbox" type="checkbox" name="" id="" />
+            <img className="filter-checkbox-color"
+            src={black}
+            alt="black" />
+            <input
+              className="filter-checkbox"
+              type="checkbox"
+              value="B"
+              onChange={onColorCheckboxChange}
+            />
           </li>
+
           <li>
-            <img className="filter-checkbox-color" src={red} alt="red" />
-            <input className="filter-checkbox" type="checkbox" name="" id="" />
+            <img className="filter-checkbox-color"
+            src={red}
+            alt="red" />
+            <input
+              className="filter-checkbox"
+              type="checkbox"
+              value="R"
+              onChange={onColorCheckboxChange}
+            />
           </li>
+
           <li>
-            <img className="filter-checkbox-color" src={green} alt="green" />
-            <input className="filter-checkbox" type="checkbox" name="" id="" />
+            <img className="filter-checkbox-color"
+            src={green}
+            alt="green" />
+            <input
+              className="filter-checkbox"
+              type="checkbox"
+              value="G"
+              onChange={onColorCheckboxChange}
+            />
           </li>
+
           <li>
             <img
               className="filter-checkbox-color"
               src={colorless}
               alt="colorless"
             />
-            <input className="filter-checkbox" type="checkbox" name="" id="" />
+            <input
+              className="filter-checkbox"
+              type="checkbox"
+              value="CL"
+              onChange={onColorCheckboxChange}
+            />
           </li>
         </ul>
 
