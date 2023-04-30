@@ -45,6 +45,7 @@ function App() {
   const [cart, dispatchCart] = useReducer(cartReducer, []);
   const [showCheckedOutDisp, setShowCheckedOutDisp] = useState(false);
   const [view, setView] = useState("products");
+  const [checkoutCounter, setCheckoutCounter] = useState(0);
 
   // Get database info
   useEffect(() => {
@@ -58,7 +59,7 @@ function App() {
       }
     }
     fetchData();
-  }, []);
+  }, [checkoutCounter]); // dependency triggered inside handleCheckoutComplete
 
   // Back to top button
   const handleScroll = () => {
@@ -109,6 +110,7 @@ function App() {
   const handleCheckoutComplete = () => {
     setCheckedOut(true);
     setView("checkedOutDisp");
+    setCheckoutCounter(checkoutCounter + 1); // increment to trigger dependency
   };
 
   const getCartItemQuantity = (itemId) => {
