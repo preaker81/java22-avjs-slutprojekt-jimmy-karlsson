@@ -43,6 +43,8 @@ function App() {
   const [showBackToTopButton, setShowBackToTopButton] = useState(false);
   const [checkedOut, setCheckedOut] = useState(false);
   const [cart, dispatchCart] = useReducer(cartReducer, []);
+  const [showCheckedOutDisp, setShowCheckedOutDisp] = useState(false);
+  const [view, setView] = useState("products");
 
   // Get database info
   useEffect(() => {
@@ -97,11 +99,16 @@ function App() {
 
   // Connected to the cart reducer function
   const showProducts = () => {
-    setShowCheckout(false);
+    setView("products");
   };
 
   const showShoppingCart = () => {
-    setShowCheckout(true);
+    setView("checkout");
+  };
+
+  const handleCheckoutComplete = () => {
+    setCheckedOut(true);
+    setView("checkedOutDisp");
   };
 
   const getCartItemQuantity = (itemId) => {
@@ -125,39 +132,40 @@ function App() {
     dispatchCart({ type: "UPDATE_ITEM_QUANTITY", uuid, newQuantity });
   };
 
-  const handleCheckoutComplete = () => {
-    setCheckedOut(true);
+  const hideCheckedOutDisp = () => {
+    setShowCheckedOutDisp(false);
   };
 
   return (
     <div>
       <Header
-        showCheckout={showCheckout}
+        view={view}
+        showCheckout={view === "checkout"}
         cart={cart}
         onShowProducts={showProducts}
         onShowShoppingCart={showShoppingCart}
       />
-      {!showCheckout && (
+      {view === "products" && (
         <Sidebar onColorCheckboxChange={handleColorCheckboxChange} />
       )}
-      {!showCheckout && (
+      {view === "products" && (
         <Products
           data={selectedColors.size > 0 ? filteredData : data}
           addToCart={addToCart}
           getCartItemQuantity={getCartItemQuantity}
         />
       )}
-      {showCheckout && (
+      {view === "checkout" && (
         <CheckOut
           cart={cart}
           onRemoveItem={removeFromCart}
           onUpdateCartItemQuantity={updateCartItemQuantity}
           onClearCart={clearCart}
-          onCheckoutComplete={handleCheckoutComplete} // Add this prop
+          onCheckoutComplete={handleCheckoutComplete}
         />
       )}
 
-      {checkedOut && !showCheckout && <CheckedOutDisp />}
+      {view === "checkedOutDisp" && <CheckedOutDisp />}
 
       {showBackToTopButton && (
         <button onClick={scrollToTop} className="back-to-top">

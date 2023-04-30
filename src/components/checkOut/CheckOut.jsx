@@ -53,6 +53,7 @@ function CheckOut({
     if (allStocksUpdated) {
       // Clear the cart if all stocks are updated successfully
       onClearCart();
+      // Call the onCheckoutComplete prop
       onCheckoutComplete();
     } else {
       alert("Not enough stock for some items. Please adjust your cart.");

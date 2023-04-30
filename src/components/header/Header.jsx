@@ -2,7 +2,13 @@ import React from "react";
 import "/src/components/header/header.css";
 import logo from "/src/img/logo.png";
 
-function Header({ showCheckout, cart, onShowProducts, onShowShoppingCart }) {
+function Header({
+  view,
+  showCheckout,
+  cart,
+  onShowProducts,
+  onShowShoppingCart,
+}) {
   return (
     <header>
       <nav className="nav-bar">
@@ -25,7 +31,7 @@ function Header({ showCheckout, cart, onShowProducts, onShowShoppingCart }) {
         </ul>
       </nav>
 
-      {!showCheckout && (
+      {!showCheckout && view !== "checkedOutDisp" && (
         <div className="searchbar">
           <input className="searchbar-input" type="text" />
           <button className="searchbar-btn">Search</button>
