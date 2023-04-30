@@ -1,14 +1,34 @@
 import React from "react";
 import "/src/components/checkout/checkoutItem.css";
 
-function CheckOutItem({ name, price, onRemove}) {
-  console.log("CheckoutItem props:", { name, price });
+function CheckOutItem({
+  uuid,
+  name,
+  price,
+  quantity,
+  stock,
+  onRemoveItem,
+  onUpdateCartItemQuantity,
+}) {
+  const handleQuantityChange = (event) => {
+    const newQuantity = parseInt(event.target.value, 10);
+    onUpdateCartItemQuantity(uuid, newQuantity);
+  };
+
   return (
     <div className="checkout-item">
       <h3>{name}</h3>
+      <h3>Price: $ {price}</h3>
+      <h3>Total: $ {(price * quantity).toFixed(2)}</h3>
       <div className="checkout-item-rightdiv">
-        <h3>$ {price}</h3>
-        <button onClick={onRemove}>Remove</button>
+        <input
+          type="number"
+          min="0"
+          max={stock}
+          value={quantity}
+          onChange={handleQuantityChange}
+        />
+        <button onClick={() => onRemoveItem(uuid)}>Remove</button>
       </div>
     </div>
   );

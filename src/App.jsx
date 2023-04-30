@@ -55,10 +55,32 @@ function App() {
     setShowCheckout(true);
   };
 
+  const getCartItemQuantity = (itemId) => {
+    const itemInCart = cart.find((item) => item.uuid === itemId);
+    return itemInCart ? itemInCart.quantity : 0;
+  };
+
   // For adding items to the cart
   const addToCart = (item) => {
-    console.log("Adding item to cart:", item);
-    setCart((prevCart) => [...prevCart, item]);
+    const existingItemIndex = cart.findIndex(
+      (cartItem) => cartItem.uuid === item.uuid
+    );
+
+    if (existingItemIndex !== -1) {
+      setCart((prevCart) => {
+        const newCart = [...prevCart];
+        newCart[existingItemIndex].quantity += 1;
+        return newCart;
+      });
+    } else {
+      setCart((prevCart) => [
+        ...prevCart,
+        {
+          ...item,
+          quantity: 1,
+        },
+      ]);
+    }
   };
 
   // For clearing the cart
@@ -66,29 +88,48 @@ function App() {
     setCart([]);
   };
 
-    // For removing a specific item from the cart
-    const removeFromCart = (uuid) => {
-      setCart((prevCart) => prevCart.filter((item) => item.uuid !== uuid));
-    };
+  // For removing a specific item from the cart
+  const removeFromCart = (uuid) => {
+    setCart((prevCart) => prevCart.filter((item) => item.uuid !== uuid));
+  };
+
+  // Function to update the quantity of an item in the cart
+  const updateCartItemQuantity = (uuid, newQuantity) => {
+    setCart((prevCart) => {
+      const newCart = [...prevCart];
+      const itemIndex = newCart.findIndex((item) => item.uuid === uuid);
+      newCart[itemIndex].quantity = newQuantity;
+      return newCart;
+    });
+  };
 
   return (
     <div>
-    <Header
-      showCheckout={showCheckout}
-      cart={cart}
-      onShowProducts={showProducts}
-      onShowShoppingCart={showShoppingCart}
-    />
+      <Header
+        showCheckout={showCheckout}
+        cart={cart}
+        onShowProducts={showProducts}
+        onShowShoppingCart={showShoppingCart}
+      />
       {!showCheckout && (
         <Sidebar onColorCheckboxChange={handleColorCheckboxChange} />
       )}
       {!showCheckout && (
         <Products
           data={selectedColors.size > 0 ? filteredData : data}
-          onAddToCart={addToCart}
+          addToCart={addToCart}
+          getCartItemQuantity={getCartItemQuantity}
         />
       )}
- <CheckOut cart={cart} onClearCart={clearCart} onRemoveFromCart={removeFromCart} />    </div>
+      {showCheckout && (
+        <CheckOut
+          cart={cart}
+          onRemoveItem={removeFromCart}
+          onUpdateCartItemQuantity={updateCartItemQuantity}
+          onClearCart={clearCart} // Add this prop
+        />
+      )}
+    </div>
   );
 }
 

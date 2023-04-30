@@ -2,17 +2,29 @@ import React from "react";
 import "/src/components/checkout/checkout.css";
 import CheckOutItem from "./CheckoutItem";
 
-function CheckOut({ cart, onClearCart, onRemoveFromCart }) {
-  console.log("Cart in CheckOut:", cart);
-  console.log(cart);
+function CheckOut({
+  cart,
+  onRemoveItem,
+  onUpdateCartItemQuantity,
+  onClearCart,
+}) {
+  // Calculate the total sum of the CheckoutItem total sums
+  const totalSum = cart.reduce(
+    (total, item) => total + item.quantity * item.price,
+    0
+  );
 
   const renderCheckoutItems = () => {
     return cart.map((item) => (
       <CheckOutItem
         key={item.uuid}
+        uuid={item.uuid}
         name={item.name}
         price={item.price}
-        onRemove={() => onRemoveFromCart(item.uuid)}
+        quantity={item.quantity}
+        stock={item.stock}
+        onRemoveItem={onRemoveItem}
+        onUpdateCartItemQuantity={onUpdateCartItemQuantity}
       />
     ));
   };
@@ -33,11 +45,11 @@ function CheckOut({ cart, onClearCart, onRemoveFromCart }) {
             Clear Cart
           </button>
         </div>
+        <div className="checkout-sumdiv">
+          <h1>Total: $ {totalSum.toFixed(2)}</h1>
+        </div>
       </div>
       <div className="checkout-item-container">{renderCheckoutItems()}</div>
-      <div className="checkout-sumdiv">
-        <h1>Total: $ {totalPrice.toFixed(2)}</h1>
-      </div>
     </section>
   );
 }
