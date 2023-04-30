@@ -1,6 +1,7 @@
 import React from "react";
 import "/src/components/checkout/checkout.css";
 import CheckOutItem from "./CheckoutItem";
+import { getFirebaseData, updateStock } from "/src/js/firebase";
 
 function CheckOut({
   cart,
@@ -35,12 +36,35 @@ function CheckOut({
 
   const totalPrice = calculateTotalPrice();
 
+  const handleCheckout = async () => {
+    let allStocksUpdated = true;
+
+    // Loop through all the items in the cart
+    for (const item of cart) {
+      const stockUpdated = await updateStock(item.uuid, item.quantity);
+
+      if (!stockUpdated) {
+        allStocksUpdated = false;
+        break;
+      }
+    }
+
+    if (allStocksUpdated) {
+      // Clear the cart if all stocks are updated successfully
+      onClearCart();
+    } else {
+      alert("Not enough stock for some items. Please adjust your cart.");
+    }
+  };
+
   return (
     <section className="checkout-container">
       <div className="checkout-headings">
         <h3 className="checkout-header">Shopping Cart</h3>
         <div className="checkout-btndiv">
-          <button className="checkout-buybtn">Checkout</button>
+          <button className="checkout-buybtn" onClick={handleCheckout}>
+            Checkout
+          </button>
           <button className="checkout-clearbtn" onClick={onClearCart}>
             Clear Cart
           </button>
