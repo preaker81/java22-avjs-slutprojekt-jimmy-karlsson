@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { getFirebaseData } from "/src/js/firebase";
 import Header from "./components/header/Header";
 import Products from "./components/products/Products";
@@ -6,13 +6,43 @@ import Sidebar from "./components/sidebar/Sidebar";
 import "/src/app.css";
 import CheckOut from "./components/checkout/Checkout";
 
+const cartReducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_ITEM":
+      const existingItemIndex = state.findIndex(
+        (cartItem) => cartItem.uuid === action.item.uuid
+      );
+
+      if (existingItemIndex !== -1) {
+        const newState = [...state];
+        newState[existingItemIndex].quantity += 1;
+        return newState;
+      } else {
+        return [...state, { ...action.item, quantity: 1 }];
+      }
+    case "REMOVE_ITEM":
+      return state.filter((item) => item.uuid !== action.uuid);
+    case "UPDATE_ITEM_QUANTITY":
+      return state.map((item) =>
+        item.uuid === action.uuid
+          ? { ...item, quantity: action.newQuantity }
+          : item
+      );
+    case "CLEAR_CART":
+      return [];
+    default:
+      return state;
+  }
+};
+
 function App() {
   const [data, setData] = useState([]);
   const [selectedColors, setSelectedColors] = useState(new Set());
   const [showCheckout, setShowCheckout] = useState(false);
-  const [cart, setCart] = useState([]);
+  const [showBackToTopButton, setShowBackToTopButton] = useState(false);
 
-  // Gets the DB information and stores it in a state
+  const [cart, dispatchCart] = useReducer(cartReducer, []);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -26,7 +56,24 @@ function App() {
     fetchData();
   }, []);
 
-  // Function that is passed to Sidebar for filtering by color
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    if (scrollY > 20) {
+      setShowBackToTopButton(true);
+    } else {
+      setShowBackToTopButton(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const handleColorCheckboxChange = (event) => {
     const color = event.target.value;
     const newSelectedColors = new Set(selectedColors);
@@ -40,17 +87,14 @@ function App() {
     setSelectedColors(newSelectedColors);
   };
 
-  // Filter the DB data before passing to Products
   const filteredData = data.filter((item) =>
     item.colorIdentity.some((color) => selectedColors.has(color))
   );
 
-  // For toggling to products
   const showProducts = () => {
     setShowCheckout(false);
   };
 
-  // For toggling to shoppingcart
   const showShoppingCart = () => {
     setShowCheckout(true);
   };
@@ -60,47 +104,20 @@ function App() {
     return itemInCart ? itemInCart.quantity : 0;
   };
 
-  // For adding items to the cart
   const addToCart = (item) => {
-    const existingItemIndex = cart.findIndex(
-      (cartItem) => cartItem.uuid === item.uuid
-    );
-
-    if (existingItemIndex !== -1) {
-      setCart((prevCart) => {
-        const newCart = [...prevCart];
-        newCart[existingItemIndex].quantity += 1;
-        return newCart;
-      });
-    } else {
-      setCart((prevCart) => [
-        ...prevCart,
-        {
-          ...item,
-          quantity: 1,
-        },
-      ]);
-    }
+    dispatchCart({ type: "ADD_ITEM", item });
   };
 
-  // For clearing the cart
   const clearCart = () => {
-    setCart([]);
+    dispatchCart({ type: "CLEAR_CART" });
   };
 
-  // For removing a specific item from the cart
   const removeFromCart = (uuid) => {
-    setCart((prevCart) => prevCart.filter((item) => item.uuid !== uuid));
+    dispatchCart({ type: "REMOVE_ITEM", uuid });
   };
 
-  // Function to update the quantity of an item in the cart
   const updateCartItemQuantity = (uuid, newQuantity) => {
-    setCart((prevCart) => {
-      const newCart = [...prevCart];
-      const itemIndex = newCart.findIndex((item) => item.uuid === uuid);
-      newCart[itemIndex].quantity = newQuantity;
-      return newCart;
-    });
+    dispatchCart({ type: "UPDATE_ITEM_QUANTITY", uuid, newQuantity });
   };
 
   return (
@@ -126,8 +143,13 @@ function App() {
           cart={cart}
           onRemoveItem={removeFromCart}
           onUpdateCartItemQuantity={updateCartItemQuantity}
-          onClearCart={clearCart} // Add this prop
+          onClearCart={clearCart}
         />
+      )}
+      {showBackToTopButton && (
+        <button onClick={scrollToTop} className="back-to-top">
+          Back to Top
+        </button>
       )}
     </div>
   );

@@ -37,6 +37,7 @@ header {
   padding: 0.8rem;
   margin-right: 1rem;
   font-size: 1.2rem;
+  cursor: pointer;
 }
 
 .header-btn-checkout {
@@ -48,6 +49,7 @@ header {
   font-size: 1.2rem;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .header-btn-checkout-amount {
@@ -82,4 +84,5 @@ header {
   font-size: 1rem;
   height: 1.5rem;
   width: 4rem;
+  cursor: pointer;
 }
