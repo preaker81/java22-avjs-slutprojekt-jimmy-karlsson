@@ -5,6 +5,7 @@ import Products from "./components/products/Products";
 import Sidebar from "./components/sidebar/Sidebar";
 import "/src/app.css";
 import CheckOut from "./components/checkout/Checkout";
+import CheckedOutDisp from "./components/CheckedOutDisp/CheckedOutDisp";
 
 const cartReducer = (state, action) => {
   switch (action.type) {
@@ -40,9 +41,10 @@ function App() {
   const [selectedColors, setSelectedColors] = useState(new Set());
   const [showCheckout, setShowCheckout] = useState(false);
   const [showBackToTopButton, setShowBackToTopButton] = useState(false);
-
+  const [checkedOut, setCheckedOut] = useState(false);
   const [cart, dispatchCart] = useReducer(cartReducer, []);
 
+  // Get database info
   useEffect(() => {
     async function fetchData() {
       try {
@@ -56,6 +58,7 @@ function App() {
     fetchData();
   }, []);
 
+  // Back to top button
   const handleScroll = () => {
     const scrollY = window.scrollY;
     if (scrollY > 20) {
@@ -74,6 +77,7 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // Filter cards by color
   const handleColorCheckboxChange = (event) => {
     const color = event.target.value;
     const newSelectedColors = new Set(selectedColors);
@@ -91,6 +95,7 @@ function App() {
     item.colorIdentity.some((color) => selectedColors.has(color))
   );
 
+  // Connected to the cart reducer function
   const showProducts = () => {
     setShowCheckout(false);
   };
@@ -120,6 +125,10 @@ function App() {
     dispatchCart({ type: "UPDATE_ITEM_QUANTITY", uuid, newQuantity });
   };
 
+  const handleCheckoutComplete = () => {
+    setCheckedOut(true);
+  };
+
   return (
     <div>
       <Header
@@ -144,8 +153,12 @@ function App() {
           onRemoveItem={removeFromCart}
           onUpdateCartItemQuantity={updateCartItemQuantity}
           onClearCart={clearCart}
+          onCheckoutComplete={handleCheckoutComplete} // Add this prop
         />
       )}
+
+      {checkedOut && !showCheckout && <CheckedOutDisp />}
+
       {showBackToTopButton && (
         <button onClick={scrollToTop} className="back-to-top">
           Back to Top

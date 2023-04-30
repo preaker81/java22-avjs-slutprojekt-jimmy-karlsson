@@ -8,6 +8,7 @@ function CheckOut({
   onRemoveItem,
   onUpdateCartItemQuantity,
   onClearCart,
+  onCheckoutComplete,
 }) {
   // Calculate the total sum of the CheckoutItem total sums
   const totalSum = cart.reduce(
@@ -52,6 +53,7 @@ function CheckOut({
     if (allStocksUpdated) {
       // Clear the cart if all stocks are updated successfully
       onClearCart();
+      onCheckoutComplete();
     } else {
       alert("Not enough stock for some items. Please adjust your cart.");
     }
