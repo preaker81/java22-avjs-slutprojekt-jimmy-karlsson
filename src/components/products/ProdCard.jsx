@@ -19,9 +19,8 @@ function ProdCard({ item, addToCart, getCartItemQuantity }) {
       </div>
       <img src={imgURL} alt={name} />
       <h4>$ {price}</h4>
-      <h4>
-        Stock: {stock} Cart: {cartQuantity}
-      </h4>
+      <h4>In stock: {stock}</h4>
+      <h4>In cart: {cartQuantity}</h4>
       <button
         onClick={handleAddToCart}
         disabled={isOutOfStock}
