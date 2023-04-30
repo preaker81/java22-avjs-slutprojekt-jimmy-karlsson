@@ -1,7 +1,7 @@
 import React from "react";
 import "/src/components/products/ProdCard.css";
 
-function ProdCard({ name, imgURL, price, stock }) {
+function ProdCard({ name, imgURL, price, stock, onAddToCart }) {
   return (
     <div className="card-container">
       <div className="card-header">
@@ -11,7 +11,7 @@ function ProdCard({ name, imgURL, price, stock }) {
       <img src={imgURL} alt={name} />
       <h4>$ {price}</h4>
       <h4>Stock: {stock}</h4>
-      <button>Add to cart.</button>
+      <button onClick={onAddToCart}>Add to cart.</button>
     </div>
   );
 }

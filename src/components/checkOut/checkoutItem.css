@@ -1,0 +1,28 @@
+.checkout-item {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  width: 95%;
+  margin: 10px auto;
+  background-color: rgba(73, 73, 71, 0.1);
+  border-radius: 2px;
+}
+
+.checkout-item-rightdiv {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.checkout-item-rightdiv h3 {
+  margin-right: 1rem;
+}
+
+.checkout-item button {
+  background-color: #dd403a;
+  border: 1px solid #494947;
+  border-radius: 2px;
+  padding: 0.5rem;
+}

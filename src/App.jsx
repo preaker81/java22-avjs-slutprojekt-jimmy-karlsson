@@ -4,12 +4,13 @@ import Header from "./components/header/Header";
 import Products from "./components/products/Products";
 import Sidebar from "./components/sidebar/Sidebar";
 import "/src/app.css";
-import CheckOut from "./components/checkOut/CheckOut";
+import CheckOut from "./components/checkout/Checkout";
 
 function App() {
   const [data, setData] = useState([]);
   const [selectedColors, setSelectedColors] = useState(new Set());
   const [showCheckout, setShowCheckout] = useState(false);
+  const [cart, setCart] = useState([]);
 
   // Gets the DB information and stores it in a state
   useEffect(() => {
@@ -44,30 +45,50 @@ function App() {
     item.colorIdentity.some((color) => selectedColors.has(color))
   );
 
-  // For toggling between shoppingcart and products
+  // For toggling to products
   const showProducts = () => {
     setShowCheckout(false);
   };
 
+  // For toggling to shoppingcart
   const showShoppingCart = () => {
     setShowCheckout(true);
   };
 
+  // For adding items to the cart
+  const addToCart = (item) => {
+    console.log("Adding item to cart:", item);
+    setCart((prevCart) => [...prevCart, item]);
+  };
+
+  // For clearing the cart
+  const clearCart = () => {
+    setCart([]);
+  };
+
+    // For removing a specific item from the cart
+    const removeFromCart = (uuid) => {
+      setCart((prevCart) => prevCart.filter((item) => item.uuid !== uuid));
+    };
+
   return (
     <div>
-      <Header
-        showCheckout={showCheckout}
-        onShowProducts={showProducts}
-        onShowShoppingCart={showShoppingCart}
-      />
+    <Header
+      showCheckout={showCheckout}
+      cart={cart}
+      onShowProducts={showProducts}
+      onShowShoppingCart={showShoppingCart}
+    />
       {!showCheckout && (
         <Sidebar onColorCheckboxChange={handleColorCheckboxChange} />
       )}
       {!showCheckout && (
-        <Products data={selectedColors.size > 0 ? filteredData : data} />
+        <Products
+          data={selectedColors.size > 0 ? filteredData : data}
+          onAddToCart={addToCart}
+        />
       )}
-      {showCheckout && <CheckOut />}
-    </div>
+ <CheckOut cart={cart} onClearCart={clearCart} onRemoveFromCart={removeFromCart} />    </div>
   );
 }
 

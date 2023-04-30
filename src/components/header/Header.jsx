@@ -2,7 +2,7 @@ import React from "react";
 import "/src/components/header/header.css";
 import logo from "/src/img/logo.png";
 
-function Header({ showCheckout, onShowProducts, onShowShoppingCart }) {
+function Header({ showCheckout, cart, onShowProducts, onShowShoppingCart }) {
   return (
     <header>
       <nav className="nav-bar">
@@ -19,7 +19,7 @@ function Header({ showCheckout, onShowProducts, onShowShoppingCart }) {
               onClick={onShowShoppingCart}
             >
               Shopping Cart
-              <p className="header-btn-checkout-amount">100</p>
+              <p className="header-btn-checkout-amount">{cart.length}</p>
             </button>
           </li>
         </ul>

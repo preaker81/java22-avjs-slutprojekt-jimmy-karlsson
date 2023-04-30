@@ -1,7 +1,7 @@
 import "/src/components/products/products.css";
 import ProdCard from "./ProdCard";
 
-function Products({ data, setData }) {
+function Products({ data, onAddToCart }) {
   return (
     <div className="product-container">
       {data.map((item) => (
@@ -11,6 +11,7 @@ function Products({ data, setData }) {
           imgURL={item.imgURL}
           price={item.price}
           stock={item.stock}
+          onAddToCart={() => onAddToCart(item)}
         />
       ))}
     </div>
