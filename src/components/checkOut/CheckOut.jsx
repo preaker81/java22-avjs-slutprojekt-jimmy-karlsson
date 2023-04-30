@@ -45,9 +45,9 @@ function CheckOut({
             Clear Cart
           </button>
         </div>
-        <div className="checkout-sumdiv">
-          <h1>Total: $ {totalSum.toFixed(2)}</h1>
-        </div>
+      </div>
+      <div className="checkout-sumdiv">
+        <h1>Total: $ {totalSum.toFixed(2)}</h1>
       </div>
       <div className="checkout-item-container">{renderCheckoutItems()}</div>
     </section>
