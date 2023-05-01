@@ -39,29 +39,23 @@ const cartReducer = (state, action) => {
 function App() {
   const [data, setData] = useState([]);
   const [selectedColors, setSelectedColors] = useState(new Set());
-  const [showCheckout, setShowCheckout] = useState(false);
   const [showBackToTopButton, setShowBackToTopButton] = useState(false);
-  const [checkedOut, setCheckedOut] = useState(false);
   const [cart, dispatchCart] = useReducer(cartReducer, []);
-  const [showCheckedOutDisp, setShowCheckedOutDisp] = useState(false);
   const [view, setView] = useState("products");
   const [checkoutCounter, setCheckoutCounter] = useState(0);
 
-  // Get database info
   useEffect(() => {
     async function fetchData() {
       try {
         const result = await getFirebaseData();
-        console.log(result[0]);
         setData(result);
       } catch (error) {
         console.error("Error fetching data in MyComponent:", error);
       }
     }
     fetchData();
-  }, [checkoutCounter]); // dependency triggered inside handleCheckoutComplete
+  }, [checkoutCounter]);
 
-  // Back to top button
   const handleScroll = () => {
     const scrollY = window.scrollY;
     if (scrollY > 20) {
@@ -80,7 +74,6 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Filter cards by color
   const handleColorCheckboxChange = (event) => {
     const color = event.target.value;
     const newSelectedColors = new Set(selectedColors);
@@ -98,7 +91,6 @@ function App() {
     item.colorIdentity.some((color) => selectedColors.has(color))
   );
 
-  // Connected to the cart reducer function
   const showProducts = () => {
     setView("products");
   };
@@ -108,9 +100,8 @@ function App() {
   };
 
   const handleCheckoutComplete = () => {
-    setCheckedOut(true);
     setView("checkedOutDisp");
-    setCheckoutCounter(checkoutCounter + 1); // increment to trigger dependency
+    setCheckoutCounter(checkoutCounter + 1);
   };
 
   const getCartItemQuantity = (itemId) => {
@@ -132,10 +123,6 @@ function App() {
 
   const updateCartItemQuantity = (uuid, newQuantity) => {
     dispatchCart({ type: "UPDATE_ITEM_QUANTITY", uuid, newQuantity });
-  };
-
-  const hideCheckedOutDisp = () => {
-    setShowCheckedOutDisp(false);
   };
 
   return (
@@ -166,7 +153,6 @@ function App() {
           onCheckoutComplete={handleCheckoutComplete}
         />
       )}
-
       {view === "checkedOutDisp" && <CheckedOutDisp />}
 
       {showBackToTopButton && (
