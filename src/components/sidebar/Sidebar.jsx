@@ -1,5 +1,7 @@
 import React from "react";
+// Importing the sidebar stylesheet
 import "/src/components/sidebar/sidebar.css";
+// Importing color icons
 import white from "/src/img/w.png";
 import blue from "/src/img/u.png";
 import black from "/src/img/b.png";

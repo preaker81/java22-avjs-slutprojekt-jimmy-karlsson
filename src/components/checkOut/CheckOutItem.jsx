@@ -1,7 +1,7 @@
 import React from "react";
 import "/src/components/checkout/checkoutItem.css";
 
-function CheckOutItem({
+function CheckoutItem({
   uuid,
   name,
   price,
@@ -10,6 +10,7 @@ function CheckOutItem({
   onRemoveItem,
   onUpdateCartItemQuantity,
 }) {
+  // Handle the change of item quantity in the cart
   const handleQuantityChange = (event) => {
     const newQuantity = parseInt(event.target.value, 10);
     onUpdateCartItemQuantity(uuid, newQuantity);
@@ -34,4 +35,4 @@ function CheckOutItem({
   );
 }
 
-export default CheckOutItem;
+export default CheckoutItem;

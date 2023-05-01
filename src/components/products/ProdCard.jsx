@@ -1,16 +1,23 @@
 import React from "react";
 import "/src/components/products/ProdCard.css";
 
+// Functional component that renders a product card
 function ProdCard({ item, addToCart, getCartItemQuantity }) {
+  // Destructuring item object to get required properties
   const { name, imgURL, price, stock, uuid } = item;
+
+  // Determine if the item is out of stock
   const isOutOfStock = getCartItemQuantity(uuid) >= stock;
+  // Get the current quantity of the item in the cart
   const cartQuantity = getCartItemQuantity(uuid);
 
+  // Event handler for adding an item to the cart
   const handleAddToCart = (event) => {
     event.stopPropagation();
     addToCart(item);
   };
 
+  // Render product card
   return (
     <div className="card-container">
       <div className="card-header">
@@ -32,4 +39,5 @@ function ProdCard({ item, addToCart, getCartItemQuantity }) {
   );
 }
 
+// Export the memoized version of the component to avoid unnecessary re-renders
 export default React.memo(ProdCard);

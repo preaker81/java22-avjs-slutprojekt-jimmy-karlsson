@@ -4,43 +4,15 @@ import Header from "./components/header/Header";
 import Products from "./components/products/Products";
 import Sidebar from "./components/sidebar/Sidebar";
 import "/src/app.css";
-import CheckOut from "./components/checkout/Checkout";
-import CheckedOutDisp from "./components/CheckedOutDisp/CheckedOutDisp";
-
-const cartReducer = (state, action) => {
-  switch (action.type) {
-    case "ADD_ITEM":
-      const existingItemIndex = state.findIndex(
-        (cartItem) => cartItem.uuid === action.item.uuid
-      );
-
-      if (existingItemIndex !== -1) {
-        const newState = [...state];
-        newState[existingItemIndex].quantity += 1;
-        return newState;
-      } else {
-        return [...state, { ...action.item, quantity: 1 }];
-      }
-    case "REMOVE_ITEM":
-      return state.filter((item) => item.uuid !== action.uuid);
-    case "UPDATE_ITEM_QUANTITY":
-      return state.map((item) =>
-        item.uuid === action.uuid
-          ? { ...item, quantity: action.newQuantity }
-          : item
-      );
-    case "CLEAR_CART":
-      return [];
-    default:
-      return state;
-  }
-};
+import Checkout from "./components/checkout/Checkout";
+import CheckedoutDisp from "./components/CheckedoutDisp/CheckedoutDisp";
+import { cartReducer } from "/src/js/reducers/cartReducer.js";
 
 function App() {
   const [data, setData] = useState([]);
   const [selectedColors, setSelectedColors] = useState(new Set());
   const [showBackToTopButton, setShowBackToTopButton] = useState(false);
-  const [cart, dispatchCart] = useReducer(cartReducer, []);
+  const [cart, dispatchCart] = useReducer(cartReducer, []); // cartReducer is extracted to seperate file
   const [view, setView] = useState("products");
   const [checkoutCounter, setCheckoutCounter] = useState(0);
 
@@ -145,17 +117,16 @@ function App() {
         />
       )}
       {view === "checkout" && (
-        <CheckOut
+        <Checkout
           cart={cart}
           onRemoveItem={removeFromCart}
           onUpdateCartItemQuantity={updateCartItemQuantity}
           onClearCart={clearCart}
           onCheckoutComplete={handleCheckoutComplete}
-          onShowProducts={showProducts} // Add this line
+          onShowProducts={showProducts}
         />
       )}
-
-      {view === "checkedOutDisp" && <CheckedOutDisp />}
+      {view === "checkedOutDisp" && <CheckedoutDisp />}
 
       {showBackToTopButton && (
         <button onClick={scrollToTop} className="back-to-top">

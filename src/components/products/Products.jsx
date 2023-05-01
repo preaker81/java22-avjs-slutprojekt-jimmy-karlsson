@@ -6,10 +6,10 @@ function Products({ data, addToCart, getCartItemQuantity }) {
     <div className="product-container">
       {data.map((item) => (
         <ProdCard
-          key={item.uuid}
+          key={item.uuid} // Use the item's uuid as a unique key for the ProdCard component
           item={item}
-          addToCart={() => addToCart(item)}
-          getCartItemQuantity={getCartItemQuantity}
+          addToCart={() => addToCart(item)} // Pass down the addToCart function with item as an argument
+          getCartItemQuantity={getCartItemQuantity} // Pass down the getCartItemQuantity function
         />
       ))}
     </div>

@@ -1,9 +1,9 @@
 import React from "react";
 import "/src/components/checkout/checkout.css";
-import CheckOutItem from "./CheckoutItem";
-import { getFirebaseData, updateStock } from "/src/js/firebase";
+import CheckoutItem from "./CheckoutItem";
+import { updateStock } from "/src/js/firebase"; // import db update function
 
-function CheckOut({
+function Checkout({
   cart,
   onRemoveItem,
   onUpdateCartItemQuantity,
@@ -17,9 +17,10 @@ function CheckOut({
     0
   );
 
+  // Render each item in the cart as a CheckoutItem component
   const renderCheckoutItems = () => {
     return cart.map((item) => (
-      <CheckOutItem
+      <CheckoutItem
         key={item.uuid}
         uuid={item.uuid}
         name={item.name}
@@ -32,16 +33,10 @@ function CheckOut({
     ));
   };
 
-  const calculateTotalPrice = () => {
-    return cart.reduce((sum, item) => sum + item.price, 0);
-  };
-
-  const totalPrice = calculateTotalPrice();
-
+  // Handle the checkout process
   const handleCheckout = async () => {
     let allStocksUpdated = true;
-
-    // Loop through all the items in the cart
+    // Loop through all the items in the cart and update the stock
     for (const item of cart) {
       const stockUpdated = await updateStock(item.uuid, item.quantity);
 
@@ -51,10 +46,9 @@ function CheckOut({
       }
     }
 
+    // If all stocks are updated successfully, clear the cart and complete the checkout
     if (allStocksUpdated) {
-      // Clear the cart if all stocks are updated successfully
       onClearCart();
-      // Call the onCheckoutComplete prop
       onCheckoutComplete();
     } else {
       alert("Not enough stock for some items. Please adjust your cart.");
@@ -73,7 +67,7 @@ function CheckOut({
             className="checkout-clearbtn"
             onClick={() => {
               onClearCart();
-              onShowProducts(); // Add this line
+              onShowProducts();
             }}
           >
             Clear Cart
@@ -88,4 +82,4 @@ function CheckOut({
   );
 }
 
-export default CheckOut;
+export default Checkout;

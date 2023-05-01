@@ -1,11 +1,13 @@
 import React from "react";
-import "/src/components/CheckedOutDisp/checkedOutDisp.css";
+import "/src/components/CheckedoutDisp/checkedoutDisp.css";
 
-function CheckedOutDisp() {
-  return <div className="checkedout-container">
-    <h1>Purchase Successful</h1>
-    <hr />
-  </div>;
+function CheckedoutDisp() {
+  return (
+    <div className="checkedout-container">
+      <h1>Purchase Successful</h1>
+      <hr />
+    </div>
+  );
 }
 
-export default CheckedOutDisp;
+export default CheckedoutDisp;

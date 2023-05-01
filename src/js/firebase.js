@@ -1,17 +1,19 @@
 const getDBURL =
   "https://slutprojectwebshop-default-rtdb.europe-west1.firebasedatabase.app/alpha.json";
 
+// Asynchronous function to fetch data from Firebase
 async function getFirebaseData() {
   try {
-    const response = await fetch(getDBURL);
-    const dbData = await response.json();
-    return dbData;
+    const response = await fetch(getDBURL); // Fetch data from the provided URL
+    const dbData = await response.json(); // Parse the fetched data as JSON
+    return dbData; // Return the parsed data
   } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error;
+    console.error("Error fetching data:", error); // Log any error encountered during the fetch operation
+    throw error; // Rethrow the error to be caught and handled by the caller
   }
 }
 
+// Asynchronous function to update data to Firebase
 const updateStock = async (itemId, quantityToRemove) => {
   try {
     // Fetch all products
