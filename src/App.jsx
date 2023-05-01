@@ -151,8 +151,10 @@ function App() {
           onUpdateCartItemQuantity={updateCartItemQuantity}
           onClearCart={clearCart}
           onCheckoutComplete={handleCheckoutComplete}
+          onShowProducts={showProducts} // Add this line
         />
       )}
+
       {view === "checkedOutDisp" && <CheckedOutDisp />}
 
       {showBackToTopButton && (

@@ -9,6 +9,7 @@ function CheckOut({
   onUpdateCartItemQuantity,
   onClearCart,
   onCheckoutComplete,
+  onShowProducts,
 }) {
   // Calculate the total sum of the CheckoutItem total sums
   const totalSum = cart.reduce(
@@ -68,7 +69,13 @@ function CheckOut({
           <button className="checkout-buybtn" onClick={handleCheckout}>
             Checkout
           </button>
-          <button className="checkout-clearbtn" onClick={onClearCart}>
+          <button
+            className="checkout-clearbtn"
+            onClick={() => {
+              onClearCart();
+              onShowProducts(); // Add this line
+            }}
+          >
             Clear Cart
           </button>
         </div>
