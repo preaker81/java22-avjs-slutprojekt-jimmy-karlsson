@@ -60,10 +60,14 @@ function Checkout({
       <div className="checkout-headings">
         <h3 className="checkout-header">Shopping Cart</h3>
         <div className="checkout-btndiv">
-          <button className="checkout-buybtn" onClick={handleCheckout}>
+          <button
+            disabled={cart.length === 0}
+            className="checkout-buybtn"
+            onClick={handleCheckout}
+          >
             Checkout
           </button>
-          
+
           <button
             className="checkout-clearbtn"
             onClick={() => {
