@@ -9,7 +9,7 @@ import red from "/src/img/r.png";
 import green from "/src/img/g.png";
 import colorless from "/src/img/cl.png";
 
-function Sidebar({ onColorCheckboxChange }) {
+function Sidebar({ onColorCheckboxChange, selectedColors }) {
   return (
     <aside className="sidebar-left">
       <div className="filter-checkbox-container">
@@ -24,6 +24,7 @@ function Sidebar({ onColorCheckboxChange }) {
               type="checkbox"
               value="W"
               onChange={onColorCheckboxChange}
+              checked={selectedColors.has("W")}
             />
           </li>
 
@@ -35,6 +36,7 @@ function Sidebar({ onColorCheckboxChange }) {
               type="checkbox"
               value="U"
               onChange={onColorCheckboxChange}
+              checked={selectedColors.has("U")}
             />
           </li>
 
@@ -46,6 +48,7 @@ function Sidebar({ onColorCheckboxChange }) {
               type="checkbox"
               value="B"
               onChange={onColorCheckboxChange}
+              checked={selectedColors.has("B")}
             />
           </li>
 
@@ -57,6 +60,7 @@ function Sidebar({ onColorCheckboxChange }) {
               type="checkbox"
               value="R"
               onChange={onColorCheckboxChange}
+              checked={selectedColors.has("R")}
             />
           </li>
 
@@ -68,6 +72,7 @@ function Sidebar({ onColorCheckboxChange }) {
               type="checkbox"
               value="G"
               onChange={onColorCheckboxChange}
+              checked={selectedColors.has("G")}
             />
           </li>
 
@@ -83,6 +88,7 @@ function Sidebar({ onColorCheckboxChange }) {
               type="checkbox"
               value="CL"
               onChange={onColorCheckboxChange}
+              checked={selectedColors.has("CL")}
             />
           </li>
         </ul>

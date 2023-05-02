@@ -108,7 +108,10 @@ function App() {
         onShowShoppingCart={showShoppingCart}
       />
       {view === "products" && (
-        <Sidebar onColorCheckboxChange={handleColorCheckboxChange} />
+        <Sidebar
+          onColorCheckboxChange={handleColorCheckboxChange}
+          selectedColors={selectedColors}
+        />
       )}
       {view === "products" && (
         <Products

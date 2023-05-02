@@ -9,7 +9,6 @@ function Header({
   onShowProducts,
   onShowShoppingCart,
 }) {
-  console.log("Printing Cart: " + cart);
   return (
     <header>
       <nav className="nav-bar">
