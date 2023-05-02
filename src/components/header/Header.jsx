@@ -9,6 +9,7 @@ function Header({
   onShowProducts,
   onShowShoppingCart,
 }) {
+  console.log("Printing Cart: " + cart);
   return (
     <header>
       <nav className="nav-bar">
@@ -29,7 +30,12 @@ function Header({
             >
               Shopping Cart
               {/* Show the number of items in the cart */}
-              <p className="header-btn-checkout-amount">{cart.length}</p>
+              <p className="header-btn-checkout-amount">
+                {cart.reduce(
+                  (total, currentItem) => total + currentItem.quantity,
+                  0
+                )}
+              </p>
             </button>
           </li>
         </ul>

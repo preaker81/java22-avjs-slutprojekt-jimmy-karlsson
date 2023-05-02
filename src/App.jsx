@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { getFirebaseData } from "/src/js/firebase";
+import { cartReducer } from "/src/js/reducers/cartReducer.js";
+import "/src/app.css";
 import Header from "./components/header/Header";
 import Products from "./components/products/Products";
 import Sidebar from "./components/sidebar/Sidebar";
-import "/src/app.css";
 import Checkout from "./components/checkout/Checkout";
 import CheckedoutDisp from "./components/CheckedoutDisp/CheckedoutDisp";
-import { cartReducer } from "/src/js/reducers/cartReducer.js";
 
 function App() {
   const [data, setData] = useState([]);
@@ -15,6 +15,8 @@ function App() {
   const [cart, dispatchCart] = useReducer(cartReducer, []); // cartReducer is extracted to seperate file
   const [view, setView] = useState("products");
   const [checkoutCounter, setCheckoutCounter] = useState(0);
+
+  console.log("Logging cart: ", cart); //! Logging cart
 
   useEffect(() => {
     async function fetchData() {
@@ -39,7 +41,6 @@ function App() {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToTop = () => {
