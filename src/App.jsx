@@ -15,14 +15,14 @@ function App() {
   const [cart, dispatchCart] = useReducer(cartReducer, []); // cartReducer is extracted to seperate file
   const [view, setView] = useState("products");
   const [checkoutCounter, setCheckoutCounter] = useState(0);
-
-  console.log("Logging cart: ", cart); //! Logging cart
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     async function fetchData() {
       try {
         const result = await getFirebaseData();
         setData(result);
+        console.log("Fetched DB: ", checkoutCounter);
       } catch (error) {
         console.error("Error fetching data in MyComponent:", error);
       }
@@ -63,6 +63,10 @@ function App() {
   const filteredData = data.filter((item) =>
     item.colorIdentity.some((color) => selectedColors.has(color))
   );
+
+  const handleSearchInputChange = (event) => {
+    setSearchInput(event.target.value);
+  };
 
   const showProducts = () => {
     setView("products");
@@ -106,6 +110,8 @@ function App() {
         cart={cart}
         onShowProducts={showProducts}
         onShowShoppingCart={showShoppingCart}
+        onSearchInputChange={handleSearchInputChange}
+        searchInput={searchInput}
       />
       {view === "products" && (
         <Sidebar
@@ -118,8 +124,10 @@ function App() {
           data={selectedColors.size > 0 ? filteredData : data}
           addToCart={addToCart}
           getCartItemQuantity={getCartItemQuantity}
+          searchInput={searchInput}
         />
       )}
+
       {view === "checkout" && (
         <Checkout
           cart={cart}

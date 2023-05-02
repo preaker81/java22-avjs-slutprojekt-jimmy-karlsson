@@ -1,9 +1,11 @@
 import React from "react";
 import "/src/components/products/ProdCard.css";
-
-// Functional component that renders a product card
+//! Comments done
+// item: The product item object
+// addToCart: The function to add an item to the cart
+// getCartItemQuantity: The function to get the quantity of a cart item
 function ProdCard({ item, addToCart, getCartItemQuantity }) {
-  // Destructuring item object to get required properties
+  // Destructuring item
   const { name, imgURL, price, stock, uuid } = item;
 
   // Determine if the item is out of stock
@@ -17,7 +19,6 @@ function ProdCard({ item, addToCart, getCartItemQuantity }) {
     addToCart(item);
   };
 
-  // Render product card
   return (
     <div className="card-container">
       <div className="card-header">
@@ -30,8 +31,8 @@ function ProdCard({ item, addToCart, getCartItemQuantity }) {
       <h4>In cart: {cartQuantity}</h4>
       <button
         onClick={handleAddToCart}
-        disabled={isOutOfStock}
-        className={`add-to-cart-btn ${isOutOfStock ? "disabled" : ""}`}
+        disabled={isOutOfStock} // Disable the button if the item is out of stock
+        className={`add-to-cart-btn ${isOutOfStock ? "disabled" : ""}`} // Apply the "disabled" class if the item is out of stock
       >
         Add to cart
       </button>
