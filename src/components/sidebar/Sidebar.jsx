@@ -18,6 +18,7 @@ function Sidebar({ onColorCheckboxChange }) {
         <ul>
           <li>
             <img className="filter-checkbox-color" src={white} alt="white" />
+            {/* W stands for White following Magic the Gathering Community standard */}
             <input
               className="filter-checkbox"
               type="checkbox"
@@ -28,6 +29,7 @@ function Sidebar({ onColorCheckboxChange }) {
 
           <li>
             <img className="filter-checkbox-color" src={blue} alt="blue" />
+            {/* U stands for Blue following Magic the Gathering Community standard */}
             <input
               className="filter-checkbox"
               type="checkbox"
@@ -38,6 +40,7 @@ function Sidebar({ onColorCheckboxChange }) {
 
           <li>
             <img className="filter-checkbox-color" src={black} alt="black" />
+            {/* B stands for Black following Magic the Gathering Community standard */}
             <input
               className="filter-checkbox"
               type="checkbox"
@@ -48,6 +51,7 @@ function Sidebar({ onColorCheckboxChange }) {
 
           <li>
             <img className="filter-checkbox-color" src={red} alt="red" />
+            {/* R stands for Red following Magic the Gathering Community standard */}
             <input
               className="filter-checkbox"
               type="checkbox"
@@ -58,6 +62,7 @@ function Sidebar({ onColorCheckboxChange }) {
 
           <li>
             <img className="filter-checkbox-color" src={green} alt="green" />
+            {/* G stands for Green following Magic the Gathering Community standard */}
             <input
               className="filter-checkbox"
               type="checkbox"
@@ -72,6 +77,7 @@ function Sidebar({ onColorCheckboxChange }) {
               src={colorless}
               alt="colorless"
             />
+            {/* CL stands for Colorless following Magic the Gathering Community standard */}
             <input
               className="filter-checkbox"
               type="checkbox"

@@ -63,6 +63,7 @@ function Checkout({
           <button className="checkout-buybtn" onClick={handleCheckout}>
             Checkout
           </button>
+          
           <button
             className="checkout-clearbtn"
             onClick={() => {
