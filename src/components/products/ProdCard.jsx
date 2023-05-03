@@ -10,8 +10,6 @@ function ProdCard({ item, addToCart, getCartItemQuantity }) {
 
   // Determine if the item is out of stock
   const isOutOfStock = getCartItemQuantity(uuid) >= stock;
-  // Get the current quantity of the item in the cart
-  const cartQuantity = getCartItemQuantity(uuid);
 
   // Event handler for adding an item to the cart
   const handleAddToCart = (event) => {
@@ -28,7 +26,6 @@ function ProdCard({ item, addToCart, getCartItemQuantity }) {
       <img src={imgURL} alt={name} />
       <h4>$ {price}</h4>
       <h4>In stock: {stock}</h4>
-      <h4>In cart: {cartQuantity}</h4>
       <button
         onClick={handleAddToCart}
         disabled={isOutOfStock} // Disable the button if the item is out of stock

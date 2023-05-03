@@ -1,15 +1,15 @@
 import React from "react";
 import "/src/components/checkout/checkout.css";
 import CheckoutItem from "./CheckoutItem";
-import { updateStock } from "/src/js/firebase"; // import db update function
-
+import { updateStock } from "/src/js/firebase";
+//! Commenting done
 function Checkout({
-  cart,
-  onRemoveItem,
-  onUpdateCartItemQuantity,
-  onClearCart,
-  onCheckoutComplete,
-  onShowProducts,
+  cart, // Shopping cart array passed from App.jsx
+  onRemoveItem, // removeFromCart function passed from App.jsx to CheckoutItem.jsx
+  onUpdateCartItemQuantity, // updateCartItemQuantity function passed from App.jsx to CheckoutItem.jsx
+  onClearCart, // clearCart function passed from App.jsx
+  onCheckoutComplete, // updateCartItemQuantity function passed from App.jsx
+  onShowProducts, // handleCheckoutComplete function passed from App.jsx
 }) {
   // Calculate the total sum of the CheckoutItem total sums
   const totalSum = cart.reduce(
@@ -17,17 +17,17 @@ function Checkout({
     0
   );
 
-  // Render each item in the cart as a CheckoutItem component
+  // function for render each item in the cart as a CheckoutItem component
   const renderCheckoutItems = () => {
     return cart.map((item) => (
       <CheckoutItem
-        key={item.uuid}
-        uuid={item.uuid}
-        name={item.name}
-        price={item.price}
-        quantity={item.quantity}
-        stock={item.stock}
-        onRemoveItem={onRemoveItem}
+        key={item.uuid} // Use uuid value from item of cart as key for CheckoutItem
+        uuid={item.uuid} // passing uuid from item of cart to CheckoutItem.jsx
+        name={item.name} // passing name from item of cart to CheckoutItem.jsx
+        price={item.price} // passing price from item of cart to CheckoutItem.jsx
+        quantity={item.quantity} // passing quantity from item of cart to CheckoutItem.jsx
+        stock={item.stock} // passing stock from item of cart to CheckoutItem.jsx
+        onRemoveItem={onRemoveItem} // passing onRemoveItem to CheckoutItem.jsx
         onUpdateCartItemQuantity={onUpdateCartItemQuantity}
       />
     ));
