@@ -1,9 +1,9 @@
 import React from "react";
-import "/src/components/header/header.css"; // Import header CSS
+import "/src/components/header/header.css";
 import logo from "/src/img/logo.png"; // Import logo image
 //! Comments done
 function Header({
-  view,
+  view, // State for what view to show
   showCheckout, // Determines if the checkout view is active
   cart, // Shopping cart array
   onShowProducts, // Function to switch the view to the "products" view

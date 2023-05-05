@@ -1,10 +1,11 @@
 import React from "react";
 import "/src/components/products/ProdCard.css";
 //! Comments done
-// item: The product item object
-// addToCart: The function to add an item to the cart
-// getCartItemQuantity: The function to get the quantity of a cart item
-function ProdCard({ item, addToCart, getCartItemQuantity }) {
+function ProdCard({
+  item, // The product item object
+  addToCart, // function to add an item to the cart
+  getCartItemQuantity, // function to get the quantity of a cart item
+}) {
   // Destructuring item
   const { name, imgURL, price, stock, uuid } = item;
 
