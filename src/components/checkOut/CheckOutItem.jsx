@@ -1,6 +1,6 @@
 import React from "react";
 import "/src/components/checkout/checkoutItem.css";
-//! Commenting done
+
 // Component receives props related to the cart item and functions to remove and update the quantity of the item in the cart.
 function CheckoutItem({
   uuid, // Passed from Products.jsx where it is taken from the cart state

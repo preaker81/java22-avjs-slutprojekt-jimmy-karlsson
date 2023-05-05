@@ -2,7 +2,7 @@ import React from "react";
 import "/src/components/checkout/checkout.css";
 import CheckoutItem from "./CheckoutItem";
 import { updateStock } from "/src/js/firebase";
-//! Commenting done
+
 function Checkout({
   cart, // Shopping cart array passed from App.jsx
   onRemoveItem, // removeFromCart function passed from App.jsx to CheckoutItem.jsx

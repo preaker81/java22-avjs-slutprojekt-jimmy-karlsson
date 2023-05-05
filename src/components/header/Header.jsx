@@ -1,7 +1,7 @@
 import React from "react";
 import "/src/components/header/header.css";
 import logo from "/src/img/logo.png"; // Import logo image
-//! Comments done
+
 function Header({
   view, // State for what view to show
   showCheckout, // Determines if the checkout view is active

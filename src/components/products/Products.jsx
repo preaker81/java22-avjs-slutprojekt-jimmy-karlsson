@@ -1,6 +1,6 @@
 import "/src/components/products/products.css";
 import ProdCard from "./ProdCard";
-//! Comments done
+
 function Products({
     data, // The array of product data
     addToCart, // function to add an item to the cart

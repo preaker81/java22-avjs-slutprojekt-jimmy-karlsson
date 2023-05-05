@@ -1,6 +1,6 @@
 import React from "react";
 import "/src/components/products/ProdCard.css";
-//! Comments done
+
 function ProdCard({
   item, // The product item object
   addToCart, // function to add an item to the cart
